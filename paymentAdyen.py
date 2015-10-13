@@ -22,7 +22,7 @@ rawparams = {
   'merchantAccount': 'StudioKrokBVCOM',
   'currencyCode': 'EUR',
   'paymentAmount': '199',
-  'sessionValidity': '2015-10-13T22:31:06Z',
+  'sessionValidity': '2015-10-14T22:31:06Z',
   'shipBeforeDate': '2015-10-20',
   'shopperLocale': 'en_GB',
   'merchantReference': 'SKINTEST-1435226439255',

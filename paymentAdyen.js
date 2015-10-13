@@ -64,7 +64,7 @@ HPP.prototype.generateRequest = function(options, merchantSig) {
 
 
 var test ={
-    merchantSig: 'XsbaBWKvLpez+r1X0X1dZsVTCSV7omfWXoiOFgC6YYE=',
+    merchantSig: 'TPGFeOhwQjGCDyXuu+dvO7jg4kEtso0dDsq8swgX0L4=',
 };
 
 var hppPayment = new HPP({
@@ -77,7 +77,7 @@ var values = {
     merchantAccount: 'StudioKrokBVCOM',
     skinCode: 'T71dPoT8',
     // sessionValidity: '2015-10-12T17:43:51Z',
-    sessionValidity:'2015-10-13T22:31:06Z',
+    sessionValidity:'2015-10-14T22:31:06Z',
     paymentAmount: 199,
     currencyCode: 'EUR',
     merchantReference: 'SKINTEST-1435226439255',
