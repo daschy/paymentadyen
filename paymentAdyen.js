@@ -64,15 +64,12 @@ HPP.prototype.generateRequest = function(options, merchantSig) {
 
 
 var test ={
-    merchantSig: 'dE7b6GGvFbAGgK29/2xRdPFrbFozdy4i7as6xn630Tg=',
-    //merchantSig:'sZYP7iQ/42wpP/gUADm8EJNxkubZfu4vp1xxdgYCXaw=',
+    merchantSig: '3kf3eQvj08EwsB/Bw7hiILnXAvrgGQq7ldDFMh0RUQk=',
 };
-
 
 var hppPayment = new HPP({
     test: true,
-    HMACKey: '9473C710E78B7CDBA771EA90E34FCE41F4A4C98773BC2446BB1BBC9B0A3B1339',
-    // HMACKey: '5F63B5EA8254F784AF7528942BD45AA5BAF2075FB93C4E2AC664D62768F29A2C',
+    HMACKey: 'D04380D86318264832E4A6E44A28A03D4E28B3DB18653783D07043F622B4F017',
     paymentPage: 'select',
 });
 
@@ -80,11 +77,11 @@ var values = {
     merchantAccount: 'StudioKrokBVCOM',
     skinCode: 'T71dPoT8',
     // sessionValidity: '2015-10-12T17:43:51Z',
-    sessionValidity:'2015-11-25T10:31:06Z',
+    sessionValidity:'2015-10-13T22:31:06Z',
     paymentAmount: 199,
     currencyCode: 'EUR',
     merchantReference: 'SKINTEST-1435226439255',
-    shipBeforeDate: '2015-11-01',
+    shipBeforeDate: '2015-10-20',
     shopperLocale: 'en_GB'
 };
 
@@ -93,13 +90,13 @@ console.log('HMACKEY', hppPayment._HMACKey);
 var calcMerchSig = hppPayment.generateHash(values, hppPayment._HMACKey);
 console.log('test.merchantSig == calcMerchSig',test.merchantSig == calcMerchSig)
 console.log('calcMerchSig', calcMerchSig);
-console.log('test.merchantSig', test.merchantSig);
 
 var request = hppPayment.generateRequest(values, calcMerchSig);
 console.log('requestUrl', request);
 
 
 curl.request({
+    method:'POST',
     url: request.url,
     headers:{
         'Content-Type':'application/x-www-form-urlencoded',
@@ -107,10 +104,11 @@ curl.request({
     data:request.params
 }, function (err, parts) {
     parts = parts.split('\r\n');
-    var data = parts.pop()
-      , head = parts.pop();
+    // var data = parts.pop()
+    //   , head = parts.pop();
+    console.log('Error: Invalid Request', (parts+'').indexOf('Invalid Request')>-1);
+    console.log('Error: Merchant signature?', (parts+'').indexOf('Error: Merchant signature')>-1);
 
-    console.log('response valid?', parts.indexOf('Invalid Request')>-1);
 });
 
 
