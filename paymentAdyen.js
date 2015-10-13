@@ -4,6 +4,7 @@
 var crypto = require('crypto');
 var _ = require('lodash');
 var binascii = require('binascii');
+var http = require('http');
 
 var HPP = function(config) {
 
@@ -60,13 +61,15 @@ HPP.prototype.generateRequest = function(options, callback) {
         }
     }
 
-    var testSig = 'sZYP7iQ/42wpP/gUADm8EJNxkubZfu4vp1xxdgYCXaw=';
+   
     console.log('merchantSigTest', merchantSig == testSig, merchantSig, testSig);
     requestUrl += 'merchantSig=' + merchantSig;
 
     return callback(null, requestUrl, _this._request.merchantReference);
     // });
 };
+
+
 
 var hppPayment = new HPP({
     test: true,
@@ -88,10 +91,18 @@ var request = {
 };
 
 
-hppPayment.generateRequest(request, function(err, url, merchantRef) {
-    if (err) {
-        return console.error(err);
-    }
-    console.log(url);
+var testSig = 'sZYP7iQ/42wpP/gUADm8EJNxkubZfu4vp1xxdgYCXaw=';
+var calcMerchSig = hppPayment.generateHash(request, hppPayment._HMACKey);
+console.log('testSig == calcMerchSig',testSig == calcMerchSig)
+console.log('calcMerchSig', calcMerchSig);
+console.log('testSig', testSig);
 
-});
+
+
+// hppPayment.generateRequest(request, function(err, url, merchantRef) {
+//     if (err) {
+//         return console.error(err);
+//     }
+//     console.log(url);
+
+// });
