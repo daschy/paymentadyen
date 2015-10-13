@@ -64,7 +64,7 @@ HPP.prototype.generateRequest = function(options, merchantSig) {
 
 
 var test ={
-    merchantSig: '3kf3eQvj08EwsB/Bw7hiILnXAvrgGQq7ldDFMh0RUQk=',
+    merchantSig: 'XsbaBWKvLpez+r1X0X1dZsVTCSV7omfWXoiOFgC6YYE=',
 };
 
 var hppPayment = new HPP({
@@ -87,13 +87,12 @@ var values = {
 
 console.log(values);
 console.log('HMACKEY', hppPayment._HMACKey);
-var calcMerchSig = hppPayment.generateHash(values, hppPayment._HMACKey);
-console.log('test.merchantSig == calcMerchSig',test.merchantSig == calcMerchSig)
-console.log('calcMerchSig', calcMerchSig);
-
-var request = hppPayment.generateRequest(values, calcMerchSig);
+var merchantSig = hppPayment.generateHash(values, hppPayment._HMACKey);
+var request = hppPayment.generateRequest(values, merchantSig);
 console.log('requestUrl', request);
 
+console.log('test.merchantSig == merchantSig',test.merchantSig == merchantSig)
+console.log('merchantSig', merchantSig);
 
 curl.request({
     method:'POST',
