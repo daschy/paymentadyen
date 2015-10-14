@@ -69,7 +69,7 @@ var test ={
 
 var hppPayment = new HPP({
     test: true,
-    HMACKey: 'D04380D86318264832E4A6E44A28A03D4E28B3DB18653783D07043F622B4F017',
+    HMACKey: 'FA3356D2DCFB352C634609A0122A9E166BFF0376A08AEBFBCCD7056CA13EC676',
     paymentPage: 'select',
 });
 
@@ -77,11 +77,11 @@ var values = {
     merchantAccount: 'StudioKrokBVCOM',
     skinCode: 'T71dPoT8',
     // sessionValidity: '2015-10-12T17:43:51Z',
-    sessionValidity:'2015-10-14T22:31:06Z',
+    sessionValidity:'2015-11-25T10:31:06Z',
     paymentAmount: 199,
     currencyCode: 'EUR',
     merchantReference: 'SKINTEST-1435226439255',
-    shipBeforeDate: '2015-10-20',
+    shipBeforeDate: '2015-11-01',
     shopperLocale: 'en_GB'
 };
 
