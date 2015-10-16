@@ -1,19 +1,6 @@
 var Adyen = require('./paymentAdyen.js');
 var curl = require('curlrequest');
 
-
-
-var paymentInfo = {
-    paymentAmount: 199,
-    currencyCode: 'EUR',
-    shopperLocale: 'en_GB',
-    sessionValidity: '2015-10-34T22:31:06Z',
-    shipBeforeDate: '2015-10-20',
-    merchantReference: 'SKINTEST-1435226439255/:\/12',
-    shopperEmail: 'milo@pippo.com',
-};
-
-
 var env = {};
 env.adyen = {
     live: false,
@@ -21,6 +8,20 @@ env.adyen = {
     merchantAccount: 'StudioKrokBVCOM',
     skinCode: 'T71dPoT8',
 };
+
+var paymentInfo = {
+    paymentAmount: 199,
+    currencyCode: 'EUR',
+    shopperLocale: 'en_GB',
+    // sessionValidity: '2015-10-34T22:31:06Z',
+    sessionValidity: new Date(Date.now() + 1000*60*10).toISOString(),
+    shipBeforeDate: new Date(Date.now() + 1000*60*60*24).toISOString(),
+    merchantReference: 'SKINTEST-1435226439255/:\/12',
+    shopperEmail: 'milo@pippo.com',
+};
+
+
+
 
 var hppPayment = new Adyen({
     test: (!env.adyen.live ? true : false),
