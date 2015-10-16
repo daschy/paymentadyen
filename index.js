@@ -7,10 +7,10 @@ var paymentInfo = {
     paymentAmount: 199,
     currencyCode: 'EUR',
     shopperLocale: 'en_GB',
-    sessionValidity: '2015-10-16T22:31:06Z',
+    sessionValidity: '2015-10-34T22:31:06Z',
     shipBeforeDate: '2015-10-20',
-    merchantReference: 'SKINTEST-1435226439255',
-    // shopperEmail: req.user.email,
+    merchantReference: 'SKINTEST-1435226439255/:\/12',
+    shopperEmail: 'milo@pippo.com',
 };
 
 
@@ -39,7 +39,6 @@ var values = {
     // shopperEmail:paymentInfo.shopperEmail,
 };
 
-console.log(values);
 
 var merchantSig = hppPayment.generateHash(values, env.adyen.hmacKey);
 var request = hppPayment.generateRequest(values, merchantSig);
@@ -48,7 +47,8 @@ var request = hppPayment.generateRequest(values, merchantSig);
 var test = {
     merchantSig: 'GQDbqbGrJ2xIZqWmmtMShrU4sRX4Z4IHWod86VW8Vs4=',
 };
-console.log('HMACKEY', env.adyen.HMACKey);
+console.log(values);
+console.log('HMACKEY', env.adyen.hmacKey);
 console.log('requestUrl', request);
 console.log('test.merchantSig == merchantSig', test.merchantSig == merchantSig)
 console.log('merchantSig', merchantSig);

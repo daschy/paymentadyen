@@ -38,15 +38,14 @@ Adyen.prototype.generateRequest = function(options, merchantSig) {
     var requestUrl = this._url;
     var _this = this;
     // Generate sign hash
-    // var merchantSig = _this.generateHash(options, _this._HMACKey);
     var params = '';
-    // Build url
+    // Build url params
     for (var key in options) {
         if (options.hasOwnProperty(key) && options[key]) {
             params += key + '=' + encodeURIComponent(options[key]) + '&';
         }
     }
-    params += 'merchantSig=' + merchantSig;
+    params += 'merchantSig=' + encodeURIComponent(merchantSig);
     return {url: requestUrl,
         params: params,
     };
