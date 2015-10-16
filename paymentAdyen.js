@@ -9,11 +9,6 @@ var Adyen = function(config) {
 
     var options = config || {};
 
-    if (!options.HMACKey) {
-        throw new Error('HMAC key is required');
-    }
-
-    this._HMACKey = options.HMACKey;
     this._paymentPage = options.paymentPage || 'pay';
 
     this._url = 'https://live.adyen.com/hpp/' + this._paymentPage + '.shtml';
