@@ -14,8 +14,8 @@ var paymentInfo = {
     currencyCode: 'EUR',
     shopperLocale: 'en_GB',
     // sessionValidity: '2015-10-34T22:31:06Z',
-    sessionValidity: new Date(Date.now() + 1000*60*10).toISOString(),
-    shipBeforeDate: new Date(Date.now() + 1000*60*60*24).toISOString(),
+    sessionValidity: new Date(Date.now() + 1000 * 60 * 10).toISOString(),
+    shipBeforeDate: new Date(Date.now() + 1000 * 60 * 60 * 24).toISOString(),
     merchantReference: 'SKINTEST-1435226439255/:\/12',
     shopperEmail: 'milo@pippo.com',
 };
@@ -37,7 +37,13 @@ var values = {
     shipBeforeDate: paymentInfo.shipBeforeDate,
     shopperLocale: paymentInfo.shopperLocale,
     skinCode: env.adyen.skinCode,
-    // shopperEmail:paymentInfo.shopperEmail,
+    // // shopperEmail:paymentInfo.shopperEmail,
+    shopperEmail: 'GRIMDC-grimtwin@hotmail.com',
+    // authResult:'AUTHORISED',
+    paymentMethod: 'mc',
+    pspReference: '8514454253865259',
+    shopperLocale: 'en_GB',
+    skinCode: 'T71dPoT8'
 };
 
 
@@ -54,13 +60,22 @@ console.log('requestUrl', request);
 console.log('test.merchantSig == merchantSig', test.merchantSig == merchantSig)
 console.log('merchantSig', merchantSig);
 
+var params = '';
+for (var key in request.params) {
+    if (request.params.hasOwnProperty(key) && request.params[key]) {
+        params += key + '=' + encodeURIComponent(request.params[key]) + '&';
+    }
+}
+params += 'merchantSig=' + encodeURIComponent(merchantSig);
+console.log(params);
+
 curl.request({
     method: 'POST',
     url: request.url,
     headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
     },
-    data: request.params
+    data: params
 }, function(err, parts) {
     parts = parts.split('\r\n');
     // var data = parts.pop()
